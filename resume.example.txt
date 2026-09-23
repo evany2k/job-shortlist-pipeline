@@ -1,0 +1,21 @@
+Alex Martin - Montreal, QC | alex.martin@example.com
+
+Summary: Recent Computer Science graduate with hands-on experience in data systems. Proficient in Python, SQL and Java.
+
+Education:
+- Example University - BSc Computer Science - 2022-2026
+  Coursework: Data Structures and Algorithms, Databases, Operating Systems, Software Engineering
+
+Technical Skills:
+Programming: Python, Java, SQL, JavaScript, Bash, Git
+Data/Systems: pandas, PostgreSQL, Excel, REST APIs
+
+Experience:
+Data Assistant at Example Labs, Montreal - 2024 - Present
+- Maintained data integrity and traceability in a laboratory information system
+- Automated weekly reporting with Python and SQL
+
+Projects:
+- Job Match AI: LinkedIn scraper + LLM ranking pipeline (Python, SQLite, OpenRouter)
+
+Languages: English (native), French (professional)

@@ -1,0 +1,174 @@
+# Copy this file to config.toml and edit it. config.toml is gitignored.
+
+[general]
+db_path = "data/jobs.db"
+resume_path = "resume.txt"          # plain-text résumé sent to the LLM (gitignored)
+# Only fetch descriptions for / review jobs posted on or after this date (YYYY-MM-DD).
+# Leave empty to use lookback_days instead.
+posted_since = ""
+lookback_days = 30
+
+# Fills in the LLM scoring rubric (see job_match/prompts.py).
+[candidate]
+market = "entry-level and junior roles across software, data, and environmental/scientific systems"
+target_roles = [
+    "Junior Software Developer",
+    "Junior Backend / Systems Developer (Python / Java / C++)",
+    "Junior Data Analyst / Data Engineer",
+    "Environmental Data Analyst / GIS Analyst",
+    "Sustainability / ESG Analyst",
+    "Bioinformatics or Lab Informatics Analyst",
+]
+standout_skills = "strong OOP & database fundamentals (Python, Java, C++, SQL) OR domain expertise in environmental/GIS data, sustainability (ESG), or laboratory informatics"
+
+[scraper]
+max_pages_per_search = 40
+max_pages_without_new_jobs = 2
+
+# Delays between LinkedIn requests, in seconds [min, max]. "slow" values kick in
+# after the first HTTP 429. Be conservative: aggressive scraping gets you blocked.
+[throttle]
+fast_delay = [30, 45]
+fast_long_pause = [60, 120]         # every `long_pause_every` requests
+slow_delay = [90, 150]
+slow_long_pause = [250, 400]
+long_pause_every = 5
+rate_limit_sleep = 300
+max_consecutive_rate_limits = 2
+max_total_rate_limits = 4
+
+[filters]
+allow_internships = true
+allow_far_locations = false
+strict_core_only = false            # true = only keep jobs in core_locations (or remote)
+core_locations = [
+    "montreal", "ville-marie", "mont-royal", "mont royal", "westmount", "saint-laurent",
+    "st-laurent",
+]
+far_locations = [
+    "mirabel", "varennes", "valleyfield", "vaudreuil", "terrebonne", "hyacinthe",
+    "sainte-therese", "mont-st-hilaire", "mont st-hilaire", "mont-saint-hilaire",
+    "saint-bruno", "st-bruno", "sainte-anne-de-bellevue", "sainte anne de bellevue",
+]
+company_blacklist = []
+
+[llm]
+# OpenRouter model ids, tried in order until one returns a valid review.
+models = [
+    "dots-studio/dots-3-note-preview:free",
+    "nvidia/nemotron-3-super-120b-a12b:free",
+]
+request_timeout_s = 45
+overall_timeout_s = 90
+attempts_per_model = 2
+batch_size = 100                    # max jobs reviewed per run
+log_path = "data/llm_debug.jsonl"   # raw model output, for debugging
+
+# One block per LinkedIn search. Codes match LinkedIn's URL filters:
+#   experience    (f_E):   1=Internship 2=Entry level 3=Associate 4=Mid-Senior
+#   posted_within (f_TPR): r86400=past 24h, r604800=past week
+#   job_type      (f_JT):  F=Full-time P=Part-time C=Contract
+
+[[searches]]
+name = "Jr Software Dev"
+keywords = "Junior Software Developer"
+location = "Montreal"
+experience = "1,2,3"
+posted_within = "r86400"
+job_type = "F"
+
+[[searches]]
+name = "Jr Python Dev"
+keywords = "Junior Python Developer"
+location = "Montreal"
+experience = "1,2,3"
+posted_within = "r86400"
+job_type = "F"
+
+[[searches]]
+name = "Jr Java Dev"
+keywords = "Junior Java Developer"
+location = "Montreal"
+experience = "1,2,3"
+posted_within = "r86400"
+job_type = "F"
+
+[[searches]]
+name = "Jr Backend Dev"
+keywords = "Junior Backend Developer"
+location = "Montreal"
+experience = "1,2,3"
+posted_within = "r86400"
+job_type = "F"
+
+[[searches]]
+name = "Jr Data Analyst"
+keywords = "Junior Data Analyst Python SQL"
+location = "Montreal"
+experience = "1,2,3"
+posted_within = "r86400"
+job_type = "F"
+
+[[searches]]
+name = "Jr C++ Dev"
+keywords = "Junior C++ Developer"
+location = "Montreal"
+experience = "1,2,3"
+posted_within = "r86400"
+job_type = "F"
+
+[[searches]]
+name = "LIMS Analyst"
+keywords = "LIMS Analyst"
+location = "Montreal"
+experience = "1,2,3,4"
+posted_within = "r604800"
+job_type = "F"
+
+[[searches]]
+name = "Lab Informatics"
+keywords = "Laboratory Information Management"
+location = "Montreal"
+experience = "1,2,3,4"
+posted_within = "r604800"
+job_type = "F"
+
+[[searches]]
+name = "Scientific Data"
+keywords = "Scientific Data Analyst"
+location = "Montreal"
+experience = "1,2,3"
+posted_within = "r604800"
+job_type = "F"
+
+[[searches]]
+name = "Data Integrity"
+keywords = "Data Integrity Analyst"
+location = "Montreal"
+experience = "1,2,3"
+posted_within = "r604800"
+job_type = "F"
+
+[[searches]]
+name = "Bioinformatics"
+keywords = "Bioinformatics Analyst"
+location = "Montreal"
+experience = "1,2,3"
+posted_within = "r604800"
+job_type = "F"
+
+[[searches]]
+name = "Environmental Data"
+keywords = "Environmental Data Analyst"
+location = "Canada"
+experience = "1,2,3"
+posted_within = "r604800"
+job_type = "F"
+
+[[searches]]
+name = "Sustainability ESG"
+keywords = "Sustainability Analyst"
+location = "Canada"
+experience = "1,2,3"
+posted_within = "r604800"
+job_type = "F"

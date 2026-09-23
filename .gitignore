@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Secrets and personal configuration (see the *.example files)
+.env
+config.toml
+resume.txt
+
+# Local data
+data/
+*.db
+*.jsonl
+*.log
+
+# Editors / OS
+.vscode/
+.idea/
+.DS_Store
