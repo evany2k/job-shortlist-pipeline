@@ -1,4 +1,4 @@
-# job-match-ai
+# job-shortlist-pipeline
 
 An end-to-end Python pipeline that collects LinkedIn job postings, pre-screens them with fast bilingual (EN/FR) rules, fetches full descriptions, and ranks each role against a plain-text résumé using schema-constrained LLMs via OpenRouter.
 
